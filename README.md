@@ -1,4 +1,6 @@
-# datastax-example-template
+# **WIP**
+
+datastax-example-template
 A short few sentences describing what is the purpose of the example and what the user will learn
 
 e.g.
@@ -11,7 +13,7 @@ A list of the top objectives that are being demonstrated by this sample
 
 e.g.
 * To demonstrate how to specify at runtime between a standard (DSE/DDAC/C*) client configuration and an Apollo configuration for the same application.
-  
+
 ## Project Layout
 A list of key files within this repo and a short 1-2 sentence description of why they are important to the project
 
@@ -42,4 +44,3 @@ To run this application use the following command:
 This will produce the following output:
 
 `Connected to cluster with 3 host(s) ["XX.XX.XX.136:9042","XX.XX.XX.137:9042","XX.XX.XX.138:9042"]`
-
