@@ -1,24 +1,13 @@
-# **WIP**
+# Data Center Latency Checker
+This a simple program that can be run to check the difference in latencies between 2 data centers and calculates an ongoing average.
 
-datastax-example-template
-A short few sentences describing what is the purpose of the example and what the user will learn
-
-e.g.
-This application shows how to use configure your NodeJs application to connect to DDAC/Cassandra/DSE or an Apollo database at runtime.
-
-Contributors: A listing of contributors to this repository linked to their github profile
+Contributor(s): [Patrick Callaghan](https://github.com/PatrickCallaghan)
 
 ## Objectives
-A list of the top objectives that are being demonstrated by this sample
-
-e.g.
-* To demonstrate how to specify at runtime between a standard (DSE/DDAC/C*) client configuration and an Apollo configuration for the same application.
+Observe latency difference between two data centers.
 
 ## Project Layout
-A list of key files within this repo and a short 1-2 sentence description of why they are important to the project
-
-e.g.
-* app.js - The main application file which contains all the logic to switch between the configurations
+* [Main.java](/src/main/java/com/datastax/test/Main.java) - Runs a test with either a 1KB or 5 MB payload.
 
 ## How this Works
 A description of how this sample works and how it demonstrates the objectives outlined above
@@ -26,21 +15,27 @@ A description of how this sample works and how it demonstrates the objectives ou
 ## Setup and Running
 
 ### Prerequisites
-The prerequisites required for this application to run
 
-e.g.
-* NodeJs version 8
-* A DSE 6.7 Cluster
-* Schema added to the cluster
+* Java 8
+* A DSE cluster running across two dcs
+* Maven to compile and run code
 
 ### Running
-The steps and configuration needed to run and build this application
+* **1KB payload test**
 
-e.g.
-To run this application use the following command:
+To run the simple test with a 1KB payload and pause time of 1 second, execute the following
+```
+mvn clean compile exec:java -Dexec.mainClass="com.datastax.test.Main" -DcontactPoints=<localdc-ip> -Dlocaldc=<localdc> -Dremotedc=<remotedc>
+```
 
-`node app.js`
+* **5MB payload test**  
 
-This will produce the following output:
+To use a larger 5MB payload and change the pause time to 3 seconds, add the file and pauseInSeconds arguments, for example
+```
+mvn clean compile exec:java -Dexec.mainClass="com.datastax.test.Main" -DcontactPoints=<localdc-ip> -Dlocaldc=<localdc> -Dremotedc=<remotedc> -Dfile=bigfile5M -DpauseInSeconds=3
+```
 
-`Connected to cluster with 3 host(s) ["XX.XX.XX.136:9042","XX.XX.XX.137:9042","XX.XX.XX.138:9042"]`
+You can add pass any file to simulate your payload. 
+  	bin/dsetool create_core datastax_banking_iot.latest_transactions generateResources=true reindex=true coreOptions=rt.yaml
+
+* **Sample queries**
